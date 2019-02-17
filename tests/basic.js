@@ -96,9 +96,8 @@ var tests = [
     var account = {
       agreeTos: true
     , keypair: goodGuy.keypair
-    , receipt: {}
+    , receipt: { foo: 'bar' }
     };
-
     return leStore.accounts.setAsync(goodGuy, account).then(function (account) {
       if (!account || !account.id || !account.email) {
         throw new Error('accounts.set should return the object with its new `id` attached');
@@ -113,7 +112,6 @@ var tests = [
     return leStore.accounts.checkAsync({
       accountId: goodGuy.accountId
     }).then(function (account) {
-
       if (!account) {
         throw new Error("Did not find account.");
       }
@@ -192,7 +190,6 @@ var tests = [
     account[rnd] = rnd;
     return leStore.accounts.setKeypairAsync(opts, account.keypair).then(function () {
       return leStore.accounts.setAsync(opts, account).then(function (account) {
-
         if ('_account_id' === account.id || '__account_id' === account.id) {
           throw new Error("Should create `id` deterministically from email or public key, not the given `accountId` or `id`.");
         }
@@ -264,7 +261,7 @@ var tests = [
       }
     };
 
-    return leStore.certificates.setAsync(certOpts, certOpts.certs);
+    return leStore.certificates.setAsync(certOpts);
   }
   // and another
 , function () {
@@ -278,7 +275,7 @@ var tests = [
       }
     };
 
-    return leStore.certificates.setAsync(certOpts, certOpts.certs);
+    return leStore.certificates.setAsync(certOpts);
   }
 
   // basic test (set by email)
