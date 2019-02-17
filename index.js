@@ -94,18 +94,18 @@ module.exports.create = function (options) {
       cb(null, { privkey: 'PEM', cert: 'PEM', chain: 'PEM', domains: [], accountId: '...' });
     }
     // Certificates
-  , set: function (opts, pems, cb) {
+  , set: function (opts, cb) {
       // opts.domains   // each of these must be indexed
       // opts.email     // optional, should be indexed
       // opts.accountId // optional - same as set by you in accounts.set(opts, keypair) above
 
-      // pems.privkey
-      // pems.cert
-      // pems.chain
+      // opts.certs.privkey
+      // opts.certs.cert
+      // opts.certs.chain
 
 
       // SAVE to the database, index the email address, the accountId, and alias the domains
-      cb(null, pems);
+      cb(null,  { privkey: 'PEM', cert: 'PEM', chain: 'PEM' });
     }
 
   };
